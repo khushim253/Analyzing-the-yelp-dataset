@@ -1,0 +1,651 @@
+1. Profile the data by finding the total number of records for each of the tables below:
+	
+i. Attribute table =10000
+SQL CODE- 
+	SELECT COUNT(*)
+        FROM attribute;
+ii. Business table =10000
+SQL CODE-
+	SELECT COUNT(*)
+        FROM business;
+iii. Category table =10000
+SQL CODE-
+	SELECT COUNT(*)
+        FROM category;
+iv. Checkin table =10000
+SQL CODE-
+	SELECT COUNT(*)
+	FROM checkin;
+v. elite_years table =10000
+SQL CODE-
+	SELECT COUNT(*)
+	FROM elite_years;
+vi. friend table = 10000
+SQL CODE-
+	SELECT COUNT(*)
+	FROM friend;
+vii. hours table =10000
+	SELECT COUNT(*)
+	FROM hours;
+viii. photo table =10000 
+SQL CODE-
+	SELECT COUNT(*)
+	FROM photo;
+ix. review table =10000
+SQL CODE-
+ 	SELECT COUNT(*)
+	FROM review;
+x. tip table = 10000
+SQL CODE-
+	SELECT COUNT(*)
+	FROM tip;
+xi. user table =10000
+SQL CODE-
+	SELECT COUNT(*)
+	FROM user;
+
+
+
+
+
+
+
+2.Find the total distinct records by either the foreign key or primary key for each table. If two foreign keys are listed in the table, please specify which foreign key.
+
+i. Business =(primary key is "id" and distict records=10000)
+SQL CODE-
+	SELECT COUNT(DISTINCT name)
+	FROM business;
+ii. Hours =(foreign key is "business_id and distinct records=1562)
+SQL CODE-
+	SELECT COUNT(DISTINCT business_id)
+	FROM hours;
+iii. Category =(Foreign key is "business_id" and distinct records=2643)
+SQL CODE-
+	SELECT COUNT(DISTINCT business_id)
+	FROM category;
+iv. Attribute =(foreign key is "name" and distinct records= 39)
+SQL CODE-
+	SELECT COUNT(DISTINCT name)
+	FROM attribute;
+v. Review =(primary key is "id" and distinct records=10000)
+SQL CODE-
+	SELECT COUNT(DISTINCT id)
+	FROM review;
+vi. Checkin = (Foreign key is "business_id" and distinct records=493)
+SQL CODE-
+	SELECT COUNT(DISTINCT business_id)
+	FROM checkin;
+vii. Photo =(primary key is "id" and distinct records=10000)
+SQL CODE-
+	SELECT COUNT(DISTINCT id)
+	FROM photo;
+viii. Tip = (primary key is "user_id" and distinct records =537)
+SQL CODE-
+	SELECT COUNT(DISTINCT user_id)
+	FROM tip;
+ix. User = (primary key is "id" and distinct records=10000)
+SQL CODE-
+	SELECT COUNT(DISTINCT id)
+	FROM user;
+x. Friend = (foreign key is "user_id" and distinct records =11)
+SQL CODE-
+	SELECT COUNT(DISTINCT user_id)
+	FROM friend;
+xi. Elite_years =(primary key is "user_id" and distinct records =2780)
+SQL CODE-
+	SELECT COUNT(DISTINCT user_id)
+	FROM elite_years;
+
+
+
+
+3.Are there any columns with null values in the Users table? Indicate "yes," or "no."
+
+	Answer:no
+	
+	
+	SQL code used to arrive at answer:
+	SELECT *
+	FROM user
+	WHERE id = NULL or 
+	name = NULL or 
+	review_count = NULL or 
+	yelping_since = NULL or 
+	useful = NULL or 
+	funny = NULL or 
+	cool = NULL or 
+	fans= NULL or 
+	average_stars= NULL or
+	compliment_hot= NULL or
+	compliment_more= NULL or
+	compliment_profile= NULL or
+	compliment_cute= NULL or
+	compliment_list= NULL or
+	compliment_note= NULL or 
+	compliment_plain = NULL or 
+	compliment_cool= NULL or 
+	compliment_funny= NULL or 
+	compliment_writer= NULL or 
+	compliment_photos= NULL;
+
+
++----+------+--------------+---------------+--------+-------+------+------+---------------+----------------+-----------------+--------------------+-----------------+-----------------+-----------------+------------------+-----------------+------------------+-------------------+-------------------+
+| id | name | review_count | yelping_since | useful | funny | cool | fans | average_stars | compliment_hot | compliment_more | compliment_profile | compliment_cute | compliment_list | compliment_note | compliment_plain | compliment_cool | compliment_funny | compliment_writer | compliment_photos |
++----+------+--------------+---------------+--------+-------+------+------+---------------+----------------+-----------------+--------------------+-----------------+-----------------+-----------------+------------------+-----------------+------------------+-------------------+-------------------+
++----+------+--------------+---------------+--------+-------+------+------+---------------+----------------+-----------------+--------------------+-----------------+-----------------+-----------------+------------------+-----------------+------------------+-------------------+-------------------+
+(Zero rows)
+
+
+
+
+
+4. For each table and column listed below, display the smallest (minimum), largest (maximum), and average (mean) value for the following fields:
+
+	i. Table: Review, Column: Stars
+	
+		min:	1	max:	5	avg:     3.7082
+		
+	
+	ii. Table: Business, Column: Stars
+	
+		min:	1.0	max:	5.0	avg:      3.6549
+		
+	
+	iii. Table: Tip, Column: Likes
+	
+		min:	0	max:	2	avg:       0.0144
+		
+	
+	iv. Table: Checkin, Column: Count
+	
+		min:	1	max:	53	avg:        1.9414
+		
+	
+	v. Table: User, Column: Review_count
+	
+		min:	0	max:	2000	 avg:        24.2995
+
+SQL CODE-
+	SELECT MIN(review_count),
+	MAX(review_count),
+	AVG(review_count)
+	FROM user;
+
+ MIN(review_count) | MAX(review_count) | AVG(review_count) |
++-------------------+-------------------+-------------------+
+|                 0 |              2000 |           24.2995 |
+
+
+    
+
+
+
+
+5.List the cities with the most reviews in descending order:
+
+	SQL code used to arrive at answer:
+		SELECT  city,
+		SUM(review_count) AS total_reviews
+		FROM business
+		GROUP BY city
+		ORDER BY total_reviews DESC;
+	
+	
+	Copy and Paste the Result Below:
++-----------------+---------------+
+| city            | total_reviews |
++-----------------+---------------+
+| Las Vegas       |         82854 |
+| Phoenix         |         34503 |
+| Toronto         |         24113 |
+| Scottsdale      |         20614 |
+| Charlotte       |         12523 |
+| Henderson       |         10871 |
+| Tempe           |         10504 |
+| Pittsburgh      |          9798 |
+| Montréal        |          9448 |
+| Chandler        |          8112 |
+| Mesa            |          6875 |
+| Gilbert         |          6380 |
+| Cleveland       |          5593 |
+| Madison         |          5265 |
+| Glendale        |          4406 |
+| Mississauga     |          3814 |
+| Edinburgh       |          2792 |
+| Peoria          |          2624 |
+| North Las Vegas |          2438 |
+| Markham         |          2352 |
+| Champaign       |          2029 |
+| Stuttgart       |          1849 |
+| Surprise        |          1520 |
+| Lakewood        |          1465 |
+| Goodyear        |          1155 |
++-----------------+---------------+
+(Output limit exceeded, 25 of 362 total rows shown)
+
+
+
+
+
+6.Find the distribution of star ratings to the business in the following cities:
+
+i. Avon
+
+SQL code used to arrive at answer:
+
+	SELECT stars,
+	COUNT(*) AS count
+	FROM business
+	WHERE city='Avon'
+	GROUP BY stars;
+
+
+Copy and Paste the Resulting Table Below (2 columns â€“ star rating and count):
+
++-------+-------+
+| stars | count |
++-------+-------+
+|   1.5 |     1 |
+|   2.5 |     2 |
+|   3.5 |     3 |
+|   4.0 |     2 |
+|   4.5 |     1 |
+|   5.0 |     1 |
++-------+-------+
+
+
+
+ii. Beachwood
+	
+SQL code used to arrive at answer:
+	SELECT stars,COUNT(*) AS count
+	FROM business
+	WHERE city='Beachwood'
+	GROUP BY stars;
+Copy and Paste the Resulting Table Below (2 columns â€“ star rating and count):
+
++-------+-------+
+| stars | count |
++-------+-------+
+|   2.0 |     1 |
+|   2.5 |     1 |
+|   3.0 |     2 |
+|   3.5 |     2 |
+|   4.0 |     1 |
+|   4.5 |     2 |
+|   5.0 |     5 |
++-------+-------+
+
+
+7. Find the top 3 users based on their total number of reviews:
+		
+	SQL code used to arrive at answer:
+	
+	SELECT id,name,review_count
+	FROM user
+	ORDER BY review_count DESC
+	LIMIT 3;
+		
+	Copy and Paste the Result Below:
+
+
++------------------------+--------+--------------+
+| id                     | name   | review_count |
++------------------------+--------+--------------+
+| -G7Zkl1wIWBBmD0KRy_sCw | Gerald |         2000 |
+| -3s52C4zL_DHRK0ULG6qtg | Sara   |         1629 |
+| -8lbUNlXVSoXqaRRiHiSNg | Yuri   |         1339 |
++------------------------+--------+--------------+
+
+
+
+
+8. Does posing more reviews correlate with more fans?
+ANSWER-   no, posing more reviews does not correlate with more fans
+
+	Please explain your findings and interpretation of the results:
+EXPLANATION-   
+          Amy having highest number of fans (509) but she has only 609 review count and 
+          gerald having highest review count but not having highest fans and  its pretty
+	  more clear from the below result.
+
+SQL CODE-
+	SELECT id,name,fans,review_count
+	FROM user
+	ORDER BY fans DESC
+	LIMIT 5;
+OUTPUT-
+
+
++------------------------+-----------+------+--------------+
+| id                     | name      | fans | review_count |
++------------------------+-----------+------+--------------+
+| -9I98YbNQnLdAmcYfb324Q | Amy       |  503 |          609 |
+| -8EnCioUmDygAbsYZmTeRQ | Mimi      |  497 |          968 |
+| --2vR0DIsmQ6WfcSzKWigw | Harald    |  311 |         1153 |
+| -G7Zkl1wIWBBmD0KRy_sCw | Gerald    |  253 |         2000 |
+| -0IiMAZI2SsQ7VmyzJjokQ | Christine |  173 |          930 |
++------------------------+-----------+------+--------------+
+
+
+
+ 9. Are there more reviews with the word "love" or with the word "hate" in them?
+
+	Answer: there are more reviews with word "love".
+
+	
+	SQL code used to arrive at answer:
+
+	SELECT  'love' word ,count(*) as count
+	FROM review
+	WHERE text like '%love%'
+	UNION 
+	SELECT 'hate' word ,count(*) as hate_reviews
+	FROM review
+	WHERE text like '%hate%';
+
+output-
+	 +------+--------------+
+	 | word |     count    |
+ 	 +------+--------------+
+ 	 | hate |          232 |
+ 	 | love |         1780 |
+ 	 +------+--------------+
+
+
+b
+
+	
+10. Find the top 10 users with the most fans:
+
+	SQL code used to arrive at answer:
+	
+	SELECT name,fans
+	FROM user
+	ORDER BY fans DESC
+	LIMIT 10;
+
+
+
+	Copy and Paste the Result Below:
+ 
++-----------+------+
+| name      | fans |
++-----------+------+
+| Amy       |  503 |
+| Mimi      |  497 |
+| Harald    |  311 |
+| Gerald    |  253 |
+| Christine |  173 |
+| Lisa      |  159 |
+| Cat       |  133 |
+| William   |  126 |
+| Fran      |  124 |
+| Lissa     |  120 |
++-----------+------+
+    
+
+
+
+
+
+
+
+
+
+
+                         PART- 2
+
+
+
+Part 2: Inferences and Analysis
+
+1. Pick one city and category of your choice and group the businesses in that city
+ or category by their overall star rating. Compare the businesses with 2-3 stars to
+ the businesses with 4-5 stars and answer the following questions. Include your code.
+
+    I choose Restaurants as category and Toronto as city.
+
+SQL CODE FOR GROUPING THE BUSINESSES AND CHOOSING TWO GROUPS BY THEIR STARS RATING DIFFERENCE-
+	SELECT b.name,
+	b.stars,
+	b.review_count,
+	b.city,
+	c.category
+	FROM business b INNER JOIN category c ON b.id=c.business_id
+	WHERE b.city='Toronto' and c.category='Restaurants'
+	ORDER BY stars DESC;
+OUTPUT-
+
+
+
++--------------------+-------+--------------+---------+-------------+
+| name               | stars | review_count | city    | category    |
++--------------------+-------+--------------+---------+-------------+
+| Cabin Fever        |   4.5 |           26 | Toronto | Restaurants |
+| Sushi Osaka        |   4.5 |            8 | Toronto | Restaurants |
+| Mama Mia           |   4.0 |            8 | Toronto | Restaurants |
+| Naniwa-Taro        |   4.0 |           75 | Toronto | Restaurants |
+| Edulis             |   4.0 |           89 | Toronto | Restaurants |
+| The Kosher Gourmet |   3.5 |            3 | Toronto | Restaurants |
+| Big Smoke Burger   |   3.0 |           47 | Toronto | Restaurants |
+| Pizzaiolo          |   3.0 |           34 | Toronto | Restaurants |
+| 99 Cent Sushi      |   2.0 |            5 | Toronto | Restaurants |
+| Royal Dumpling     |   1.5 |            4 | Toronto | Restaurants |
++--------------------+-------+--------------+---------+-------------+
+ 	
+
+	for comparison i choose Edulis(4-5 stars) and Big Smoke Burger(2-3 stars) rating.
+
+
+	
+i. Do the two groups you chose to analyze have a different distribution of hours?
+	yes they have different distribution hours.
+SQL CODE- 
+	SELECT b.name,h.hours as distribution_hours
+	FROM business b INNER JOIN hours h on b.id=h.business_id
+	WHERE b.name IN ('Edulis','Big Smoke Burger');
+OUTPUT-
+
++------------------+-----------------------+
+| name             | distribution_hours    |
++------------------+-----------------------+
+| Big Smoke Burger | Monday|10:30-21:00    |
+| Big Smoke Burger | Tuesday|10:30-21:00   |
+| Big Smoke Burger | Friday|10:30-21:00    |
+| Big Smoke Burger | Wednesday|10:30-21:00 |
+| Big Smoke Burger | Thursday|10:30-21:00  |
+| Big Smoke Burger | Sunday|11:00-19:00    |
+| Big Smoke Burger | Saturday|10:30-21:00  |
+| Edulis           | Sunday|12:00-16:00    |
+| Edulis           | Friday|18:00-23:00    |
+| Edulis           | Wednesday|18:00-23:00 |
+| Edulis           | Thursday|18:00-23:00  |
+| Edulis           | Saturday|18:00-23:00  |
++------------------+-----------------------+
+
+
+
+ii. Do the two groups you chose to analyze have a different number of reviews?
+	answer-   yes they have different number of reviews.
+SQL CODE-
+	SELECT name,review_count
+	FROM business
+	WHERE name IN ('Edulis','Big Smoke Burger');
+
+OUTPUT-
++------------------+--------------+
+| name             | review_count |
++------------------+--------------+
+| Big Smoke Burger |           47 |
+| Edulis           |           89 |
++------------------+--------------+
+
+
+
+
+iii. Are you able to infer anything from the location data provided between these two groups?
+    YES , we can conclude based on address. Big Smoke Burger is located in Yonge Street and
+Edulis located in Niagra Street. in niagra strret there is only one restaurant or one business
+ and in yonge street there are 99 types of other businesses also so based on that we can say 
+Edulis have more customers because it is the only one in that area.
+here is another view also that yonge street has numbers of businesses means area have more customers 
+and more demand but count of reviews is less in case of big smoke burger so it contradict itself 
+
+SQL CODE-
+	SELECT name,
+	review_count,
+	stars,
+	address, city
+	FROM business
+	WHERE address like '%Niagara Street%' AND city='Toronto';
+OUTPUT-
++--------+--------------+-------+--------------------+---------+
+| name   | review_count | stars | address            | city    |
++--------+--------------+-------+--------------------+---------+
+| Edulis |           89 |   4.0 | 169 Niagara Street | Toronto |
++--------+--------------+-------+--------------------+---------+
+
+
+
+SQL CODE-
+
+SELECT name,
+review_count,
+stars,
+address
+FROM business 
+WHERE address LIKE '%Yonge Street%' AND city='Toronto'
+ORDER BY review_count DESC;
+
+OUTPUT-
+
+
++-----------------------------+--------------+-------+-------------------+
+| name                        | review_count | stars | address           |
++-----------------------------+--------------+-------+-------------------+
+| Salad King Restaurant       |          778 |   3.5 | 340 Yonge Street  |
+| Burger's Priest             |          203 |   3.5 | 3397 Yonge Street |
+| Sansotei                    |          185 |   4.0 | 650 Yonge Street  |
+| Katsuya                     |          132 |   4.5 | 6048 Yonge Street |
+| Wanda's Belgian Waffles     |          119 |   3.5 | 361 Yonge Street  |
+| Basil Box                   |          112 |   3.5 | 351 Yonge Street  |
+| Dumpling Queen              |          107 |   3.5 | 649 Yonge Street  |
+| Touhenboku Ramen Restaurant |           97 |   3.5 | 2459 Yonge Street |
+| Thai On Yonge               |           69 |   3.5 | 370 Yonge Street  |
+| The Cupcake Shoppe          |           67 |   3.0 | 2409 Yonge Street |
+| Rachel's Coffee House       |           66 |   4.0 | 2011 Yonge Street |
+| Darvish Restaurant Tempus   |           62 |   4.0 | 508 Yonge Street  |
+| Absolute Comedy             |           59 |   3.5 | 2335 Yonge Street |
+| Patient Networks            |           48 |   4.5 | 157 Yonge Street  |
+| Big Smoke Burger            |           47 |   3.0 | 260 Yonge Street  |
+| Balzac's Coffee Roastery    |           41 |   3.5 | 789 Yonge Street  |
+| Takumi Sushi Restaurant     |           40 |   2.5 | 484 Yonge Street  |
+| Amaya Bread Bar             |           39 |   3.5 | 3305 Yonge Street |
+| Hair Story                  |           38 |   4.0 | 482 Yonge Street  |
+| Altona Kebob                |           38 |   3.5 | 6099 Yonge Street |
+| Moksha Yoga Uptown          |           34 |   3.5 | 1498 Yonge Street |
+| Alma Natural Spa            |           31 |   4.5 | 2105 Yonge Street |
+| Hamaru Sushi                |           26 |   4.0 | 5469 Yonge Street |
+| Vita Sociale                |           25 |   2.0 | 2472 Yonge Street |
+| Uniqlo                      |           24 |   3.5 | 220 Yonge Street  |
++-----------------------------+--------------+-------+-------------------+
+(Output limit exceeded, 25 of 99 total rows shown)
+
+
+
+
+		
+2. Group business based on the ones that are open and the ones that are closed. What differences can you find between the ones that are still open and the ones that are closed?
+ List at least two differences and the SQL code you used to arrive at your answer.
+
+SELECT  AVG(review_count),SUM(stars),is_open
+FROM business
+GROUP BY is_open;
+
+
+output-
++-------------------+------------+---------+
+| avg(review_count) | sum(stars) | is_open |
++-------------------+------------+---------+
+|     23.1980263158 |     5351.0 |       0 |
+|     31.7570754717 |    31198.0 |       1 |
++-------------------+------------+---------+
+
+		
+i. Difference 1:
+         review_count of the businesses which are still open is more means in this time 
+         coustemers are more
+         
+ii. Difference 2:
+
+          businesses which are open having more stars means having good reviews than closed.
+
+
+
+
+3. For this last part of your analysis, you are going to choose the type of analysis you want to conduct on the Yelp dataset and are going to prepare the data for analysis.
+
+	
+i. Indicate the type of analysis you chose to do:
+ which city has the most favourable condition for which business based on review count means number of customers
+ and their respective stars ratings.
+
+
+       
+ii. Write 1-2 brief paragraphs on the type of data you will need for your analysis and why you chose that data:
+   for this analysis i need city,category,address,review_count,stars
+    why we need this data -  to find category of businesses in particular city and their reviews and reivews count 
+    basis on that we can say that this city is more favourable to this particular type of category
+
+
+
+                 
+iii. Output of your finished dataset:
++-----------------+------------------------+---------------+--------------+
+| city            | category               | sum_of_review | sum_of_stars |
++-----------------+------------------------+---------------+--------------+
+| Cleveland       | Candy Stores           |          9090 |        116.5 |
+| Las Vegas       | Japanese               |          8267 |        314.0 |
+| Phoenix         | Barbeque               |          4952 |        278.0 |
+| Scottsdale      | Real Estate            |          2747 |        120.0 |
+| Mesa            | Cannabis Clinics       |          2565 |         91.0 |
+| Toronto         | Restaurants            |          1889 |        373.0 |
+| Chandler        | Automotive             |          1408 |        206.0 |
+| Mississauga     | Shopping               |           661 |         69.5 |
+| Pittsburgh      | Pizza                  |           586 |         68.5 |
+| Medina          | Bars                   |           564 |         24.0 |
+| Westlake        | American (New)         |           525 |         20.0 |
+| Fitchburg       | American (Traditional) |           370 |         17.5 |
+| Charlotte       | Beauty & Spas          |           320 |        172.0 |
+| Litchfield Park | Restaurants            |           249 |         10.5 |
+| Middleton       | American (Traditional) |           225 |         45.0 |
+| Tempe           | Dentists               |           219 |        104.0 |
+| Oakville        | Mediterranean          |           193 |         32.0 |
+| Sun Prairie     | Diners                 |           174 |          7.0 |
+| Montréal        | Arts & Entertainment   |           166 |         32.5 |
+| Stuttgart       | Shopping               |           165 |         26.5 |
+| Henderson       | Doctors                |           129 |         95.5 |
+| Peninsula       | Nightlife              |           126 |         13.5 |
+| Edinburgh       | Restaurants            |           125 |         35.5 |
+| Chesterland     | Restaurants            |           120 |         16.0 |
+| Cuyahoga Falls  | Restaurants            |           110 |          8.0 |
++-----------------+------------------------+---------------+--------------+
+(Output limit exceeded, 25 of 61 total rows shown)
+
+ conclusion-   as we can see from results, city Cleveland has most reviews for candy stores means large number of customers for candy stores
+means to handle large customers demand new candy stores could be opened in Cleveland and same for other 
+top cities.
+
+
+
+
+       
+iv. Provide the SQL code you used to create your final dataset:
+
+
+SELECT  b.city,c.category,sum(b.review_count) as sum_of_review,sum(b.stars) as sum_of_stars
+FROM business b INNER JOIN category c ON b.id=c.business_id
+GROUP BY b.city
+ORDER BY sum_of_review desc;
